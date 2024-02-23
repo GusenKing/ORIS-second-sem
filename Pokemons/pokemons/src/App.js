@@ -17,7 +17,8 @@ function App() {
   useEffect(() => {
       fetchPokemons().then(pokemons => setPokemons(pokemons));
       }, []);
-    useEffect(() => {
+
+  useEffect(() => {
         setFilteredPokemons(pokemons);
     }, [pokemons]);
 
@@ -36,14 +37,20 @@ function App() {
               <img className="pokeball-image" alt="pokeball"
                    src="https://drive.google.com/thumbnail?id=1BPJYKpjknOwDCagb0dRgY49ILbG2K1px&sz=w1000"/>
           </div>
-          <div className="pokemon-grid">
-              {filteredPokemons.map((pokemon) => (<PokemonCard pokemon={pokemon}/>))}
+          <div className="content">
+              {filteredPokemons.length === 0 ? (
+                  <EmptySearchResult />
+              ) : (
+                  <div className="pokemon-grid">
+                      {filteredPokemons.map((pokemon) => (<PokemonCard pokemon={pokemon}/>))}
+                  </div>
+              )}
           </div>
       </div>
-);
+  );
 }
 
-function PokemonCard(props){
+function PokemonCard(props) {
     const pokemonInfo = props.pokemon;
     const pokemonImg = pokemonInfo.sprites.other.home.front_default;
     return(
@@ -90,6 +97,16 @@ function TypeLabel(props){
             {capitalizeFirstLetter(props.type)}
         </div>
     );
+}
+
+function EmptySearchResult(){
+    return(
+        <div className="empty-results">
+            <div>Oops! Try again.</div>
+            <div>The pokemon you're looking for is a unicorn. It doesn't exist in the list.</div>
+            <img alt="sad pikachu" src="https://www.orthrusonline.ru/static/images/p/nextgen/pikachupartner.png"/>
+        </div>
+    )
 }
 
 
