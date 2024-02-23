@@ -3,6 +3,7 @@ p{
 }
 
 .page-wrapper{
+  font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -34,10 +35,43 @@ p{
   z-index: -1;
 }
 
+.search-field{
+  padding: 1px 1px;
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  background-color: white;
+  min-height: 30px;
+  max-height: 30px;
+  max-width: 300px;
+  border-radius: 20px;
+}
+
+.search-field input{
+  font-size: 15px;
+  width: 210px;
+  border: none;
+  background-color: white;
+  outline: none;
+}
+
+.search-field button{
+  padding: 0 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #212529;
+  color: white;
+  font-size: 15px;
+}
+
+.search-field img{
+  margin-left: 10px;
+}
+
 
 .pokemon-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px,  1fr));
+  grid-template-columns: repeat(auto-fill, minmax(175px,  1fr));
   grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
 }
@@ -58,6 +92,11 @@ p{
   justify-content: space-evenly;
 }
 
+.pokemon-name-id span:first-child{
+  color: #0023c5;
+}
+
+
 .type-labels{
   display: flex;
   flex-direction: row;
@@ -66,6 +105,8 @@ p{
 }
 
 .pokemon-type-label{
-  border: 1px solid black;
-  border-radius: 3px;
+  padding: 1px 15px;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 6px;
 }

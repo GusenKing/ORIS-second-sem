@@ -11,7 +11,7 @@ function App() {
   }
 
   const handleClick = () => {
-      setFilteredPokemons(pokemons.filter((pokemon) => pokemon.name.startsWith(inputValue)));
+      setFilteredPokemons(pokemons.filter((pokemon) => pokemon.name.startsWith(inputValue.toLowerCase())));
   }
 
   useEffect(() => {
@@ -27,7 +27,9 @@ function App() {
               <div className="search">
                   <div className="header-text">Who are you looking for?</div>
                   <div className="search-field">
-                      <input type="text" onChange={handleChange}/>
+                      <img alt="search"
+                           src="https://drive.google.com/thumbnail?id=1KJmZc874kQMiv25RC8zsSEy_svH-Qvoq&sz=w1000"/>
+                      <input type="text" onChange={handleChange} placeholder="E.g. Pikachu"/>
                       <button onClick={handleClick} onKeyDown={handleClick}>GO</button>
                   </div>
               </div>
@@ -43,11 +45,11 @@ function App() {
 
 function PokemonCard(props){
     const pokemonInfo = props.pokemon;
-    const pokemonImg = pokemonInfo.sprites.front_default;
+    const pokemonImg = pokemonInfo.sprites.other.home.front_default;
     return(
         <div className="pokemon-card">
             <div className="pokemon-name-id">
-                <span>{pokemonInfo.name}</span>
+                <span>{capitalizeFirstLetter(pokemonInfo.name)}</span>
                 <span>{getPokemonCode(pokemonInfo.id)}</span>
             </div>
             <img className="pokemon=sprite" src={pokemonImg} alt={pokemonInfo.name}/>
@@ -59,9 +61,33 @@ function PokemonCard(props){
 }
 
 function TypeLabel(props){
+    const typeColors = {
+        "bug": "#059669",
+        "dragon": "#2ec4b6",
+        "grass": "#16c172",
+        "steel": "#73e2a7",
+        "dark": "#434649",
+        "flying": "#8b9cad",
+        "normal": "#c18cba",
+        "ghost": "#9a54a1",
+        "rock": "#63320b",
+        "ground": "#885629",
+        "fighting": "#c75000",
+        "fire": "#ef271b",
+        "electric": "#ffbf00",
+        "poison": "#6e44ff",
+        "psychic": "#db00b6",
+        "fairy": "#ee4268",
+        "water": "#4361ee",
+        "ice": "#90e0ef"
+    }
+    const typeColor = {
+        backgroundColor: typeColors[props.type]
+    };
+
     return(
-        <div className="pokemon-type-label">
-            {props.type}
+        <div className="pokemon-type-label" style={typeColor}>
+            {capitalizeFirstLetter(props.type)}
         </div>
     );
 }
@@ -78,8 +104,12 @@ function getPokemonCode(id){
     return initialString + id.toString();
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 async function fetchPokemons() {
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1100')
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=110') //limit 1075
         .then(response => response.json())
         .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
 
