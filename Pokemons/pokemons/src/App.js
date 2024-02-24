@@ -57,7 +57,7 @@ function PokemonCard(props) {
         <div className="pokemon-card">
             <div className="pokemon-name-id">
                 <span>{capitalizeFirstLetter(pokemonInfo.name)}</span>
-                <span>{getPokemonCode(pokemonInfo.id)}</span>
+                <span>#{getPokemonCode(pokemonInfo.id)}</span>
             </div>
             <img className="pokemon=sprite" src={pokemonImg} alt={pokemonInfo.name}/>
             <div className="type-labels">
@@ -111,14 +111,7 @@ function EmptySearchResult(){
 
 
 function getPokemonCode(id){
-    let initialString = "#";
-    if (id < 10){
-        return initialString + "00" + id;
-    }
-    if (id < 100)
-        return initialString + "0" + id;
-
-    return initialString + id.toString();
+    return (id.length >= 3) ? id : (new Array(3).join('0') + id).slice(-3);
 }
 
 function capitalizeFirstLetter(string) {
@@ -126,7 +119,7 @@ function capitalizeFirstLetter(string) {
 }
 
 async function fetchPokemons() {
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=110') //limit 1075
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1075') //limit 1075
         .then(response => response.json())
         .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
 
