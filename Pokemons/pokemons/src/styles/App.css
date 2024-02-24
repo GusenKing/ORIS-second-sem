@@ -2,6 +2,10 @@ p{
   font-size: 20px;
 }
 
+.a{
+  text-decoration: none;
+}
+
 .page-wrapper{
   font-family: "Poppins", sans-serif;
   display: flex;

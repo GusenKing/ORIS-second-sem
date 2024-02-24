@@ -1,10 +1,27 @@
-import './App.css';
+import './styles/App.css';
+import {getPokemonCode, capitalizeFirstLetter} from "./localUtils";
 import {useEffect, useState} from "react";
+import Card from "./pages/details";
+import {Link, Route, Routes} from "react-router-dom";
+import TypeLabel from "./components/TypeLabel";
 
-function App() {
+
+function App(){
+    return(
+        <>
+            <Routes>
+                <Route path="/" element={<MainPage/>}/>
+                <Route path="details/:name" element={<Card/>} />
+            </Routes>
+        </>
+    )
+}
+
+function MainPage() {
   const [pokemons, setPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleChange = (event) => {
       setInputValue(event.target.value);
@@ -15,12 +32,17 @@ function App() {
   }
 
   useEffect(() => {
-      fetchPokemons().then(pokemons => setPokemons(pokemons));
+      setIsFetching(true);
+      fetchPokemons()
+          .then(pokemons => setPokemons(pokemons))
+          .then(x => setIsFetching(false));
       }, []);
 
   useEffect(() => {
         setFilteredPokemons(pokemons);
     }, [pokemons]);
+
+  let renderCondition = filteredPokemons.length === 0 && !isFetching;
 
   return (
       <div className="page-wrapper">
@@ -38,7 +60,7 @@ function App() {
                    src="https://drive.google.com/thumbnail?id=1BPJYKpjknOwDCagb0dRgY49ILbG2K1px&sz=w1000"/>
           </div>
           <div className="content">
-              {filteredPokemons.length === 0 ? (
+              {renderCondition ? (
                   <EmptySearchResult />
               ) : (
                   <div className="pokemon-grid">
@@ -54,48 +76,18 @@ function PokemonCard(props) {
     const pokemonInfo = props.pokemon;
     const pokemonImg = pokemonInfo.sprites.other.home.front_default;
     return(
-        <div className="pokemon-card">
-            <div className="pokemon-name-id">
-                <span>{capitalizeFirstLetter(pokemonInfo.name)}</span>
-                <span>#{getPokemonCode(pokemonInfo.id)}</span>
+        <Link to={`details/${pokemonInfo.name}`} style={{textDecoration: "none", color: "inherit"}}>
+            <div className="pokemon-card">
+                <div className="pokemon-name-id">
+                    <span>{capitalizeFirstLetter(pokemonInfo.name)}</span>
+                    <span>#{getPokemonCode(pokemonInfo.id.toString())}</span>
+                </div>
+                <img className="pokemon=sprite" src={pokemonImg} alt={pokemonInfo.name}/>
+                <div className="type-labels">
+                    {pokemonInfo.types.map(typeSlot => <TypeLabel key={typeSlot.slot} type={typeSlot.type.name}/>)}
+                </div>
             </div>
-            <img className="pokemon=sprite" src={pokemonImg} alt={pokemonInfo.name}/>
-            <div className="type-labels">
-                {pokemonInfo.types.map(typeSlot => <TypeLabel key={typeSlot.slot} type={typeSlot.type.name}/>)}
-            </div>
-        </div>
-    );
-}
-
-function TypeLabel(props){
-    const typeColors = {
-        "bug": "#059669",
-        "dragon": "#2ec4b6",
-        "grass": "#16c172",
-        "steel": "#73e2a7",
-        "dark": "#434649",
-        "flying": "#8b9cad",
-        "normal": "#c18cba",
-        "ghost": "#9a54a1",
-        "rock": "#63320b",
-        "ground": "#885629",
-        "fighting": "#c75000",
-        "fire": "#ef271b",
-        "electric": "#ffbf00",
-        "poison": "#6e44ff",
-        "psychic": "#db00b6",
-        "fairy": "#ee4268",
-        "water": "#4361ee",
-        "ice": "#90e0ef"
-    }
-    const typeColor = {
-        backgroundColor: typeColors[props.type]
-    };
-
-    return(
-        <div className="pokemon-type-label" style={typeColor}>
-            {capitalizeFirstLetter(props.type)}
-        </div>
+        </Link>
     );
 }
 
@@ -109,17 +101,8 @@ function EmptySearchResult(){
     )
 }
 
-
-function getPokemonCode(id){
-    return (id.length >= 3) ? id : (new Array(3).join('0') + id).slice(-3);
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 async function fetchPokemons() {
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1075') //limit 1075
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50') //limit 1075
         .then(response => response.json())
         .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
 
