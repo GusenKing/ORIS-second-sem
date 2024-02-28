@@ -1,0 +1,73 @@
+progress{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    border: none;
+    height: 7px;
+}
+
+progress[value]::-webkit-progress-bar,
+progress[value]::-webkit-progress-value {
+    border-radius: 5px;
+}
+
+::-moz-progress-bar {
+    border-radius: 5px;
+}
+
+.hp-bar progress[value],
+.hp-bar ::-webkit-progress-bar{
+    background-color: #def6eb;
+}
+
+.hp-bar ::-moz-progress-bar{
+    background-color: #5ed498;
+}
+
+.hp-bar ::-webkit-progress-value{
+    background-color: #5ed498;
+}
+
+
+.attack-bar progress[value],
+.attack-bar ::-webkit-progress-bar
+{
+    background-color: #fde1db;
+}
+
+.attack-bar ::-moz-progress-bar{
+    background-color: #f44636;
+}
+
+.attack-bar ::-webkit-progress-value{
+    background-color: #f44636;
+}
+
+.defense-bar progress[value],
+.defense-bar ::-webkit-progress-bar
+{
+    background-color: #fef5e1;
+}
+
+.defense-bar ::-moz-progress-bar{
+    background-color: #fcd85d;
+}
+
+.defense-bar ::-webkit-progress-value{
+    background-color: #fcd85d;
+}
+
+.speed-bar progress[value],
+.speed-bar ::-webkit-progress-bar
+{
+    background-color: #fde1db;
+}
+
+.speed-bar ::-moz-progress-bar{
+    background-color: #ff8450;
+}
+
+.speed-bar ::-webkit-progress-value{
+    background-color: #ff8450;
+}

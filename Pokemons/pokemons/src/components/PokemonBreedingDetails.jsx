@@ -3,23 +3,25 @@ import {hectoKgToLbs, toFeet} from "../localUtils"
 function PokemonBreedingDetails(height, weight){
     return(
         <>
-            <div>
+            <>
                 <p>Breeding</p>
-                <div>
-                    <p>Height</p>
-                    <div>
-                        {toFeet(height)}
-                        {height / 10} m
+                <div className="breeding-info-container">
+                    <div className="height-part">
+                        <p>Height</p>
+                        <div className="height-block">
+                            <p>{toFeet(height)}</p>
+                            <p>{height / 10} m</p>
+                        </div>
+                    </div>
+                    <div className="weight-part">
+                        <p>Weight</p>
+                        <div className="weight-block">
+                            <p>{hectoKgToLbs(weight).toFixed(1)} lbs</p>
+                            <p>{(weight / 10).toFixed(1)} kg</p>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <p>Weight</p>
-                    <div>
-                        {hectoKgToLbs(weight).toFixed(1)} lbs
-                        {(weight / 10).toFixed(1)} kg
-                    </div>
-                </div>
-            </div>
+            </>
         </>
     )
 }
