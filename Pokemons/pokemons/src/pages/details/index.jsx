@@ -19,9 +19,9 @@ function Card(){
         )
 
     return(
-        <>
+        <div>
             <PokemonMainDetails pokemonInfo={pokemonInfo}/>
-        </>
+        </div>
     )
 }
 

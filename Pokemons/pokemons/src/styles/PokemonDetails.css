@@ -1,6 +1,23 @@
-#root{
+.details-page-wrapper{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back-to-main-header{
+    display: flex;
+    background-color: #072AC8;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 8vh;
+    max-height: 10vh;
+}
+
+.go-back-arrow{
+    margin-left: 3.5vh;
+    align-self: center;
+    height: 6vh;
+    width: auto;
 }
 
 .blocks-wrapper{
@@ -29,10 +46,14 @@
     grid-template-rows: 0.1fr minmax(0,1fr);
 }
 
+.info-block > *{
+    margin: 0 30px
+}
+
 .pokemon-name-id{
     display: flex;
     flex-direction: column;
-    padding: 15px 20px;
+    margin-top: 20px;
 }
 
 .pokemon-name-id div:nth-child(2){
@@ -47,12 +68,12 @@
     justify-content: center;
 }
 
-.details-type-labels .pokemon-type-label{
-    margin: 0 15px;
+.pokemon-type-label{
+    margin: 0 5px;
 }
 
 .bars-container{
-    padding: 20px 20px;
+    margin-top: 20px;
 }
 
 .pokemon-sprite{
@@ -72,8 +93,7 @@
 }
 
 .breeding-block > p{
-    padding-left: 15px;
-    margin: 20px 0 5px 0;
+    margin: 20px 30px 5px 30px;
 }
 
 .breeding-info-container{
@@ -102,7 +122,7 @@
     display: flex;
     flex-direction: row;
     background-color: #f8f9fa;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #e9eaea;
     padding: 0 10px;
     margin: 0 5px;
@@ -113,4 +133,52 @@
     font-size: 14px;
     margin: 0;
     padding: 10px;
+}
+
+.moves-block > *{
+    margin: 35px 30px
+}
+
+.moves-cards-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    gap: 10px;
+}
+
+.pokemon-move-card{
+    display: flex;
+    place-content: center;
+    background-color: #16c172;
+    border-radius: 10px;
+}
+
+.pokemon-move-card p{
+    color: white;
+    font-size: 13px;
+}
+
+.abilities-block > *{
+    margin: 30px;
+}
+
+.abilities-cards-container{
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(75px, 1fr));
+}
+
+.pokemon-ability-card{
+    display: flex;
+    place-content: center;
+    place-items: center;
+    background-color: #ff844f;
+    border-radius: 10px;
+}
+
+.pokemon-ability-card p{
+    color: white;
+    font-size: 13px;
+    margin: 0;
 }

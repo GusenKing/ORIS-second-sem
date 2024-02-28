@@ -1,3 +1,14 @@
+export async function fetchPokemons() {
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50') //limit 1075
+        .then(response => response.json())
+        .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
+
+    const fetchPromises = pokemonUrls.map(url => fetch(url)
+        .then(response => response.json()));
+
+    return await Promise.all(fetchPromises);
+}
+
 export function getPokemonCode(id){
     return (id.length >= 3) ? id : (new Array(3).join('0') + id).slice(-3);
 }

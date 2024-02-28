@@ -1,9 +1,10 @@
 import './styles/App.css';
-import {getPokemonCode, capitalizeFirstLetter} from "./localUtils";
+import {fetchPokemons} from "./localUtils";
 import {useEffect, useState} from "react";
 import Card from "./pages/details";
-import {Link, Route, Routes} from "react-router-dom";
-import TypeLabel from "./components/TypeLabel";
+import {Route, Routes} from "react-router-dom";
+import PokemonCard from "./components/PokemonCard";
+import EmptySearchResult from "./components/EmptySearchResult";
 
 
 function App(){
@@ -72,37 +73,8 @@ function MainPage() {
   );
 }
 
-function PokemonCard(props) {
-    const pokemonInfo = props.pokemon;
-    const pokemonImg = pokemonInfo.sprites.other.home.front_default;
-    return(
-        <Link to={`details/${pokemonInfo.name}`} style={{textDecoration: "none", color: "inherit"}}>
-            <div className="pokemon-card">
-                <div className="pokemon-name-id">
-                    <span>{capitalizeFirstLetter(pokemonInfo.name)}</span>
-                    <span>#{getPokemonCode(pokemonInfo.id.toString())}</span>
-                </div>
-                <img className="pokemon=sprite" src={pokemonImg} alt={pokemonInfo.name}/>
-                <div className="type-labels">
-                    {pokemonInfo.types.map(typeSlot => <TypeLabel key={typeSlot.slot} type={typeSlot.type.name}/>)}
-                </div>
-            </div>
-        </Link>
-    );
-}
-
-function EmptySearchResult(){
-    return(
-        <div className="empty-results">
-            <div>Oops! Try again.</div>
-            <div>The pokemon you're looking for is a unicorn. It doesn't exist in the list.</div>
-            <img alt="sad pikachu" src="https://www.orthrusonline.ru/static/images/p/nextgen/pikachupartner.png"/>
-        </div>
-    )
-}
-
-async function fetchPokemons() {
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50') //limit 1075
+async function loadNextBatch(limit, current, offset){
+    const pokemonUrls = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${current + offset}`)
         .then(response => response.json())
         .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
 
