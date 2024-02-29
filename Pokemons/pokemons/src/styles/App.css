@@ -75,7 +75,7 @@ p{
 }
 
 .content{
-  margin-top: 15px;
+  margin: 15px 20px 0 20px;
 }
 
 .pokemon-grid{
@@ -90,7 +90,11 @@ p{
   background-color: white;
   padding: 10px 5px;
   border-radius: 15px;
-  box-shadow:  10px  10px  5px  0 lightgray;
+  /*box-shadow:  10px  10px  5px  0 lightgray;*/
+  box-shadow:
+          10px  0  5px  -5px lightgray,
+          -10px 0 5px -5px lightgrey,
+          0 10px 5px -5px lightgrey;
   display: flex;
   flex-direction: column;
 }

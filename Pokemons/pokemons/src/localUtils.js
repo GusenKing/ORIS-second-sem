@@ -1,5 +1,26 @@
+export const typeColors = {
+    "bug": "#059669",
+    "dragon": "#2ec4b6",
+    "grass": "#16c172",
+    "steel": "#73e2a7",
+    "dark": "#434649",
+    "flying": "#8b9cad",
+    "normal": "#c18cba",
+    "ghost": "#9a54a1",
+    "rock": "#63320b",
+    "ground": "#885629",
+    "fighting": "#c75000",
+    "fire": "#ef271b",
+    "electric": "#ffbf00",
+    "poison": "#6e44ff",
+    "psychic": "#db00b6",
+    "fairy": "#ee4268",
+    "water": "#4361ee",
+    "ice": "#90e0ef"
+}
+
 export async function fetchPokemons() {
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50') //limit 1075
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=30') //limit 1075
         .then(response => response.json())
         .then(pokemon => pokemon.results.map(nameAndUrl => nameAndUrl.url));
 

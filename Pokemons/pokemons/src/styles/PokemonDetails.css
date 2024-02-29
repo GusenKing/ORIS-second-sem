@@ -148,14 +148,21 @@
 
 .pokemon-move-card{
     display: flex;
-    place-content: center;
-    background-color: #16c172;
+    flex-direction: column;
+    place-items: center;
     border-radius: 10px;
+}
+
+.pokemon-move-card img{
+    margin: 2vh;
+    max-height: 3vh;
+    max-width: 3vh;
 }
 
 .pokemon-move-card p{
     color: white;
     font-size: 13px;
+    margin: 0 0 1.5vh 0;
 }
 
 .abilities-block > *{
@@ -171,13 +178,29 @@
 
 .pokemon-ability-card{
     display: flex;
+    flex-direction: column;
     place-content: center;
     place-items: center;
     background-color: #ff844f;
     border-radius: 10px;
 }
 
-.pokemon-ability-card p{
+.circle{
+    display: flex;
+    place-content: center;
+    background: white;
+    border-radius: 50%;
+    width: 3vh;
+    height: 3vh;
+}
+
+.circle p{
+    color: #ff844f;
+    font-size: 15px;
+    margin: 0;
+}
+
+.pokemon-ability-card > p{
     color: white;
     font-size: 13px;
     margin: 0;

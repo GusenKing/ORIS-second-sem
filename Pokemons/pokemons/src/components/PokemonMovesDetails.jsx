@@ -5,7 +5,7 @@ function PokemonMovesDetails(moves){
         <>
             <p>Moves</p>
             <div className="moves-cards-container">
-                {moves.map(moveInfo => PokemonMoveCard(moveInfo.move.name))}
+                {moves.slice(0, 9).map(moveInfo => PokemonMoveCard(moveInfo))}
             </div>
         </>
     )
