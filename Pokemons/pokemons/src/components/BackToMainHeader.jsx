@@ -9,8 +9,8 @@ function BackToMainHeader(){
 
     return(
         <div className="back-to-main-header">
-            <img className="go-back-arrow" onClick={goBackToMain} alt="go back arrow" src="/arrow_icon.png"/>
-            <img className="details-pokeball-image" alt="pokeball" src="/pokeball.png"/>
+            <img className="go-back-arrow" onClick={goBackToMain} alt="go back arrow" src={`${process.env.PUBLIC_URL}/arrow_icon.png`}/>
+            <img className="details-pokeball-image" alt="pokeball" src={`${process.env.PUBLIC_URL}/pokeball.png`}/>
         </div>
     )
 }

@@ -11,8 +11,8 @@ function App(){
     return(
         <>
             <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path="details/:name" element={<Card/>} />
+                <Route path={"/"} element={<MainPage/>}/>
+                <Route path={"/details/:name"} element={<Card/>} />
             </Routes>
         </>
     )
@@ -24,6 +24,7 @@ function MainPage() {
   const [inputValue, setInputValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [isFetching, setIsFetching] = useState(true);
+  const [isFetchingPage, setIsFetchingPage] = useState(false);
   const [isInSearch, setIsInSearch] = useState(false);
   const [lastLoadedPokemonId, setLastLoadedPokemonId] = useState(30);
   const listInnerRef = useRef();
@@ -68,10 +69,13 @@ function MainPage() {
   const handleScroll = () => {
       if (listInnerRef.current) {
           const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-          if (scrollTop + clientHeight === scrollHeight &&
-              !isInSearch) {
+          if ((scrollTop + clientHeight === scrollHeight || scrollTop + clientHeight >= (scrollHeight - 50)) &&
+              !isInSearch &&
+              !isFetchingPage) {
+              setIsFetchingPage(true);
               loadPokemonBatch(pokemonsNameUrls.slice(lastLoadedPokemonId, lastLoadedPokemonId + 30))
                   .then(pokemonBatch => setPokemons(pokemons.concat(pokemonBatch)))
+                  .then(() => setIsFetchingPage(false));
               setLastLoadedPokemonId(lastLoadedPokemonId + 30);
           }
       }

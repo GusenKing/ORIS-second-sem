@@ -1,6 +1,5 @@
 import {capitalizeFirstLetter, typeColors} from "../localUtils";
 import {useEffect, useState} from "react";
-import {type} from "@testing-library/user-event/dist/type";
 
 function PokemonMoveCard(moveInfo){
     const [typeName, setTypeName] = useState("");
@@ -17,7 +16,7 @@ function PokemonMoveCard(moveInfo){
 
     return(
         <div className="pokemon-move-card" style={moveCardStyle}>
-            <img alt="type icon" src={`/Types/${capitalizeFirstLetter(typeName)}.png`}></img>
+            <img alt="type icon" src={`${process.env.PUBLIC_URL}/Types/${capitalizeFirstLetter(typeName)}.png`}></img>
             <p>{capitalizeFirstLetter(moveInfo.move.name)}</p>
         </div>
     )

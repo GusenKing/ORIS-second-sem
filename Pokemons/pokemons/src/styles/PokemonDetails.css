@@ -20,6 +20,13 @@
     width: auto;
 }
 
+.details-pokeball-image{
+    align-self: center;
+    min-height: 8vh;
+    max-height: 10vh;
+}
+
+
 .blocks-wrapper{
     max-width: 50%;
     display: grid;
