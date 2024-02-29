@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ORIS-second-sem/static/css/main.519a1d0f.css",
-    "main.js": "/ORIS-second-sem/static/js/main.9e525838.js",
+    "main.css": "/ORIS-second-sem/static/css/main.6ba85f62.css",
+    "main.js": "/ORIS-second-sem/static/js/main.5c0e512b.js",
     "index.html": "/ORIS-second-sem/index.html",
-    "main.519a1d0f.css.map": "/ORIS-second-sem/static/css/main.519a1d0f.css.map",
-    "main.9e525838.js.map": "/ORIS-second-sem/static/js/main.9e525838.js.map"
+    "main.6ba85f62.css.map": "/ORIS-second-sem/static/css/main.6ba85f62.css.map",
+    "main.5c0e512b.js.map": "/ORIS-second-sem/static/js/main.5c0e512b.js.map"
   },
   "entrypoints": [
-    "static/css/main.519a1d0f.css",
-    "static/js/main.9e525838.js"
+    "static/css/main.6ba85f62.css",
+    "static/js/main.5c0e512b.js"
   ]
 }
